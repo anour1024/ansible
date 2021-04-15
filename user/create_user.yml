@@ -12,6 +12,7 @@
                    name: "{{ uname }}"
                    create_home: yes
                    home: /home/{{ uname }}
+                   # uid: "{{ uid }}"
                    # generate_ssh_key: yes
                    # groups: docker,sudo
                    # append: yes
