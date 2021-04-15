@@ -1,0 +1,15 @@
+# author: Ahmed Nour
+# created on: 15/4/2021
+# usage: 
+#   ansible-playbook remove_user.yml --extra-vars "uname=user_name"
+---
+- name: Remove user {{ uname }}
+  become: yes
+  hosts: all
+  tasks:
+          - name: Remove user 
+            user:
+                   name: "{{ uname }}"
+                   state: absent
+                   force: yes
+                   remove: yes
