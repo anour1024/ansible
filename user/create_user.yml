@@ -1,0 +1,21 @@
+# author: Ahmed Nour
+# created on: 15/4/2021
+# usage: 
+#   ansible-playbook create_user.yml --extra-vars "uname=user_name upassword=user_password"
+---
+- name: Create new user {{ uname }}
+  become: yes
+  hosts: all
+  tasks:
+          - name: Create user with password
+            user:
+                   name: "{{ uname }}"
+                   create_home: yes
+                   home: /home/{{ uname }}
+                   # generate_ssh_key: yes
+                   # groups: docker,sudo
+                   # append: yes
+                   # comment: comment about the user
+                   state: present
+                   password: "{{ upassword | password_hash('sha512') }}"
+                   shell: /bin/bash
