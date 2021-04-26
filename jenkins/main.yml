@@ -8,12 +8,12 @@
 
   pre_tasks:
     - name: add gpg key
-      ansible.builtin.apt_key:
+      apt_key:
         url: "{{ key_url }}"
         state: present
 
     - name: add jenkins repo to sources.list
-      ansible.builtin.apt_repository:
+      apt_repository:
         repo: deb https://pkg.jenkins.io/debian-stable binary/
         state: present
 
