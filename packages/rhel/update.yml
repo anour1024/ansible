@@ -1,0 +1,16 @@
+# This playbook runs the equivalent of yum update && yum upgrade on new installations of RHEL
+---
+- hosts: ec2
+  name: Update apt repositories
+  become: yes
+  # remote_user: ubuntu
+  tasks:
+    - name: Update repositories
+      yum:
+        update_cache: yes
+
+    - name: Upgrade distros
+      yum: 
+        state: latest
+        name: '*'
+        update_only: yes
