@@ -14,7 +14,7 @@
 
     - name: add jenkins repo to sources.list
       apt_repository:
-        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        repo: "{{ repo }}"
         state: present
 
     - name: Update cache
@@ -22,7 +22,7 @@
     
     - name: Ensure java is installed
       apt: 
-        name: openjdk-11-jre
+        name: openjdk-{{ java_version }}-jre
         state: present
 
   tasks:
