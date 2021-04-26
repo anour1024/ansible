@@ -1,0 +1,46 @@
+---
+- hosts: ec2
+  name: Install Jenkins
+  become: yes
+  remote_user: ec2-user
+  vars_files:
+    - vars.yml
+
+  handlers:
+    - name: update cache
+      yum: update_cache=yes
+
+  pre_tasks:
+    - name: add gpg key
+      rpm_key:
+        key: "{{ key_url }}"
+        state: present
+
+    - name: add jenkins repo to yum repos
+      get_url:
+        url: "{{ repo }}"
+        dest: "{{ repo_dest }}"
+        mode: "644"
+        owner: root
+        force_basic_auth: no
+      notify:
+        - update cache
+
+    
+    - name: Ensure java is installed
+      yum: 
+        name: java-{{ java_version }}-openjdk-devel
+        state: present
+
+  tasks:
+    - name: Install Jenkins
+      yum:
+        name: jenkins
+        state: present
+    
+    - name: Ensure jenkins service is running
+      service:
+        name: jenkins
+        state: started
+        enabled: yes
+

@@ -1,0 +1,5 @@
+---
+- key_url: "http://pkg.jenkins.io/redhat-stable/jenkins.io.key"
+- repo: "http://pkg.jenkins.io/redhat-stable/jenkins.repo"
+- repo_dest: "/etc/yum.repos.d/jenkins.repo"
+- java_version: 11
