@@ -1,0 +1,16 @@
+---
+- hosts: ec2
+  name: Update apt repositories
+  become: yes
+  remote_user: ubuntu
+  tasks:
+    - name: Update repositories
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
+
+    - name: Upgrade distros
+      apt: 
+        upgrade: dist
+        force_apt_get: yes
