@@ -1,0 +1,39 @@
+---
+- hosts: ec2
+  name: Install Jenkins
+  become: yes
+  remote_user: ubuntu
+  vars_files:
+    - vars.yml
+
+  pre_tasks:
+    - name: add gpg key
+      ansible.builtin.apt_key:
+        url: "{{ key_url }}"
+        state: present
+
+    - name: add jenkins repo to sources.list
+      ansible.builtin.apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        state: present
+
+    - name: Update cache
+      apt: update_cache=yes
+    
+    - name: Ensure java is installed
+      apt: 
+        name: openjdk-11-jre
+        state: present
+
+  tasks:
+    - name: Install Jenkins
+      apt:
+        name: jenkins
+        state: present
+    
+    - name: Ensure jenkins service is running
+      service:
+        name: jenkins
+        state: started
+        enabled: yes
+
