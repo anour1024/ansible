@@ -5,7 +5,9 @@
   remote_user: ubuntu
   vars_files:
     - vars.yml
-
+  handlers:
+    - name: update cache
+      apt: update_cache=yes
   pre_tasks:
     - name: add gpg key
       apt_key:
@@ -16,9 +18,8 @@
       apt_repository:
         repo: "{{ repo }}"
         state: present
-
-    - name: Update cache
-      apt: update_cache=yes
+      notify:
+        - update cache
     
     - name: Ensure java is installed
       apt: 
