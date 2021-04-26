@@ -1,3 +1,4 @@
+# This playbook runs the equivalent of apt-get update && apt-get upgrade on new installations of ubuntu
 ---
 - hosts: ec2
   name: Update apt repositories
