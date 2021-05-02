@@ -25,6 +25,9 @@
         force_basic_auth: no
       notify:
         - update cache
+    
+    - name: Run handlers
+      meta: flush_handlers
 
     
     - name: Ensure java is installed
