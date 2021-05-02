@@ -1,5 +1,5 @@
 ---
-- hosts: ec2
+- hosts: vm
   name: Install Jenkins
   become: yes
   remote_user: ubuntu
@@ -20,6 +20,8 @@
         state: present
       notify:
         - update cache
+    - name: Run handlers
+      meta: flush_handlers
     
     - name: Ensure java is installed
       apt: 
