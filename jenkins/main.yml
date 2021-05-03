@@ -65,4 +65,10 @@
         name: jenkins
         state: started
         enabled: yes
+    - name: Get Initial Admin Password
+      shell: "cat /var/lib/jenkins/secrets/initialAdminPassword"
+      register: initial_pw
+    
+    - name: Print Initial Admin Password
+      debug: msg="Initial Admin Password = {{ initial_pw.stdout }}"
 
