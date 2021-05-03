@@ -1,0 +1,5 @@
+---
+key_url: "https://pkg.jenkins.io/debian/jenkins.io.key"
+repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+java_version: 11
+java_package: openjdk-11-jre
