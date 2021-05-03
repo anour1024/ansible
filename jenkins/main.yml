@@ -4,8 +4,11 @@
   become: yes
 
   handlers:
-    - name: update cache
+    - name: update cache Debian
       apt: update_cache=yes
+    
+    - name: update cache RedHat
+      yum: update_cache=yes
 
   pre_tasks:
     - debug: "var=ansible_os_family"
@@ -32,7 +35,7 @@
         repo: "{{ repo }}"
         state: present
       notify:
-        - update cache
+        - update cache Debian
       when: ansible_os_family == "Debian"
     
     - name: add jenkins repo to yum repos
@@ -43,7 +46,7 @@
         owner: root
         force_basic_auth: no
       notify:
-        - update cache
+        - update cache RedHat
       when: ansible_os_family == "RedHat"
 
     - name: Run handlers
