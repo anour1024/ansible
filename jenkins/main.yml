@@ -70,7 +70,7 @@
         enabled: yes
         
     - name: Get Initial Admin Password
-      shell: "sleep 10 && curl -s {{ inventory_hostname }}:8080 -o /tmp/test.o && cat /var/lib/jenkins/secrets/initialAdminPassword"
+      shell: "sleep 15 && curl -s {{ inventory_hostname }}:8080 -o /tmp/test.o && cat /var/lib/jenkins/secrets/initialAdminPassword"
       register: initial_pw
     
     - name: Print Initial Admin Password
